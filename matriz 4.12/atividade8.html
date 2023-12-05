@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Professores</title>
+</head>
+<body>
+    <script>
+        // Inicialização da matriz para armazenar os dados dos professores
+        let matrizProfessores = [];
+
+        // Cadastro de professores
+        for (let i = 0; i < 50; i++) {
+            let nomeProfessor = prompt(`Digite o nome do professor ${i + 1}:`);
+            let turno = prompt(`Digite o turno do professor ${i + 1} (matutino, vespertino, noturno):`);
+            
+            // Limita o turno às opções matutino, vespertino e noturno
+            while (!['matutino', 'vespertino', 'noturno'].includes(turno.toLowerCase())) {
+                turno = prompt("Turno inválido. Digite novamente (matutino, vespertino, noturno):");
+            }
+
+            let disciplinas = [];
+            for (let j = 1; j <= 7; j++) {
+                let disciplina = prompt(`Digite a disciplina ${j} que o professor ${i + 1} pode ministrar:`);
+                disciplinas.push(disciplina);
+            }
+
+            // Adiciona os dados do professor à matriz
+            matrizProfessores.push([nomeProfessor, turno, disciplinas]);
+        }
+
+        // Consultas para saber qual professor pode ministrar uma disciplina em um turno
+        let disciplinaConsulta = prompt("Digite a disciplina que você deseja consultar:");
+        let turnoConsulta = prompt("Digite o turno que você deseja consultar (matutino, vespertino, noturno):");
+
+        // Encontra os professores que atendem à consulta
+        let professoresDisponiveis = matrizProfessores.filter(professor => professor[1].toLowerCase() === turnoConsulta.toLowerCase() && professor[2].includes(disciplinaConsulta));
+
+        // Imprime os resultados da consulta
+        document.write(`Professores disponíveis para ministrar ${disciplinaConsulta} no turno ${turnoConsulta}:</br>`);
+        for (let i = 0; i < professoresDisponiveis.length; i++) {
+            document.write(`Nome: ${professoresDisponiveis[i][0]}, Disciplinas: ${professoresDisponiveis[i][2].join(', ')} </br>`);
+        }
+    </script>
+</body>
+</html>

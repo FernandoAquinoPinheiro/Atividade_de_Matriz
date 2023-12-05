@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batalha Naval</title>
+</head>
+<body>
+    <script>
+        
+        const linhas = 10;
+        const colunas = 5;
+
+        // Inicialização do mapa
+        let mapa = [];
+        for (let i = 0; i < linhas; i++) {
+            mapa.push(Array(colunas).fill(0));
+        }
+
+        // Leitura das coordenadas para posicionar os navios
+        for (let i = 0; i < 10; i++) {
+            let linhaNavio = parseInt(prompt(`Jogador 1: Digite a linha para posicionar o navio ${i + 1} (0 a 9):`));
+            let colunaNavio = parseInt(prompt(`Jogador 1: Digite a coluna para posicionar o navio ${i + 1} (0 a 4):`));
+
+            // Marca a posição do navio no mapa
+            mapa[linhaNavio][colunaNavio] = 1;
+        }
+
+        // Inicialização dos pontos dos jogadores
+        let pontosJogador1 = 0;
+        let pontosJogador2 = 0;
+
+        // Leitura das coordenadas para os tiros
+        for (let i = 0; i < 10; i++) {
+            let linhaTiro = parseInt(prompt(`Jogador 2: Digite a linha para o tiro ${i + 1} (0 a 9):`));
+            let colunaTiro = parseInt(prompt(`Jogador 2: Digite a coluna para o tiro ${i + 1} (0 a 4):`));
+
+            // Verifica se houve acerto
+            if (mapa[linhaTiro][colunaTiro] === 1) {
+                pontosJogador2 += 100; // Acertou o navio (100 pontos)
+                mapa[linhaTiro][colunaTiro] = 0; // "Derruba" o navio
+            } else {
+                pontosJogador2 += 70; // Não acertou o navio (70 pontos)
+            }
+        }
+
+        // Calcula os pontos do jogador 1 contando os navios não derrubados
+        for (let i = 0; i < linhas; i++) {
+            for (let j = 0; j < colunas; j++) {
+                if (mapa[i][j] === 1) {
+                    pontosJogador1 += 70; // Navio não derrubado (70 pontos)
+                }
+            }
+        }
+
+        // Determina o vencedor
+        let vencedor = pontosJogador1 > pontosJogador2 ? "Jogador 1" : "Jogador 2";
+
+       
+        document.write(`Pontos Jogador 1: ${pontosJogador1}</br>`);
+        document.write(`Pontos Jogador 2: ${pontosJogador2}</br>`);
+        document.write(`Vencedor: ${vencedor}`);
+    </script>
+</body>
+</html>

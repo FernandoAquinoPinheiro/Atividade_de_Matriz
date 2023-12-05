@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>População das Cidades</title>
+</head>
+<body>
+    <script>
+       
+        let matrizPopulacao = [];
+
+       
+        for (let estado = 1; estado <= 20; estado++) {
+            let popEstado = [];
+
+            for (let cidade = 1; cidade <= 5; cidade++) {
+                let populacao = parseInt(prompt(`Digite a população da cidade ${cidade} do estado ${estado}:`));
+                popEstado.push(populacao);
+            }
+
+            matrizPopulacao.push(popEstado);
+        }
+
+        // Cálculo da maior, menor e média de população para cada estado
+        for (let estado = 0; estado < 20; estado++) {
+            let popEstado = matrizPopulacao[estado];
+
+            let maiorPopulacao = Math.max(...popEstado);
+            let menorPopulacao = Math.min(...popEstado);
+            let mediaPopulacao = popEstado.reduce((total, pop) => total + pop, 0) / popEstado.length;
+
+            document.write(`Estado ${estado + 1}: Maior População: ${maiorPopulacao}, Menor População: ${menorPopulacao}, Média População: ${mediaPopulacao.toFixed(2)}</br>`);
+        }
+    </script>
+</body>
+</html>

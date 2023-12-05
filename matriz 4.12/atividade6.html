@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notas dos Alunos</title>
+</head>
+<body>
+    <script>
+   
+        let gabarito = prompt("Digite o gabarito da prova (10 respostas separadas por vírgula):").split(',');
+
+       
+        let matrizAlunos = [];
+
+        
+        for (let i = 0; i < 100; i++) {
+            let matricula = prompt(`Digite a matrícula do aluno ${i + 1}:`);
+            let respostasAluno = prompt(`Digite as respostas do aluno ${i + 1} (separadas por vírgula):`).split(',');
+
+            // Calcula a nota do aluno comparando as respostas com o gabarito
+            let nota = 0;
+            for (let j = 0; j < 10; j++) {
+                if (respostasAluno[j] === gabarito[j]) {
+                    nota += 1;
+                }
+            }
+
+            // Adiciona os dados do aluno à matriz
+            matrizAlunos.push([matricula, nota]);
+
+            // Imprime os resultados para aprovados 
+            if (nota >= 7.0) {
+                document.write(`Matrícula: ${matricula}, Nota: ${nota}, Aprovado</br>`);
+            }
+        }
+
+        // Calcula a quantidade de alunos aprovados e a média da nota da turma
+        let quantidadeAprovados = 0;
+        let somaNotas = 0;
+
+        for (let i = 0; i < 100; i++) {
+            somaNotas += matrizAlunos[i][1];
+            if (matrizAlunos[i][1] >= 7.0) {
+                quantidadeAprovados++;
+            }
+        }
+
+        let mediaNotas = somaNotas / 100;
+
+       
+        document.write(`Quantidade de Alunos Aprovados: ${quantidadeAprovados}</br>`);
+        document.write(`Média da Nota da Turma: ${mediaNotas.toFixed(2)}`);
+    </script>
+</body>
+</html>
